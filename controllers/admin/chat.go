@@ -6,10 +6,10 @@ import (
 	"encoding/json"
 	"net/http"
 
-	"github.com/owncast/owncast/config"
 	"github.com/owncast/owncast/controllers"
 	"github.com/owncast/owncast/core"
 	"github.com/owncast/owncast/core/chat"
+	"github.com/owncast/owncast/core/data"
 	"github.com/owncast/owncast/models"
 	log "github.com/sirupsen/logrus"
 	"github.com/teris-io/shortid"
@@ -68,7 +68,7 @@ func SendSystemMessage(w http.ResponseWriter, r *http.Request) {
 	}
 
 	message.MessageType = models.SystemMessageSent
-	message.Author = config.Config.InstanceDetails.Name
+	message.Author = data.GetServerName()
 	message.ClientID = "owncast-server"
 	message.ID = shortid.MustGenerate()
 	message.Visible = true
